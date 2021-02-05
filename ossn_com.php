@@ -89,8 +89,7 @@ function mentions_picker() {
 		foreach ($friends as $users) {
 				$first_name_start = mb_substr($users->first_name, 0, $search_len, 'UTF-8');
 				if($first_name_start == $search_for || $first_name_start == $search_For) {
-						$p['first_name'] = $users->first_name;
-						$p['last_name']  = $users->last_name;
+						$p['name'] 		 = $users->fullname;
 						$p['imageurl']   = $users->iconURL()->smaller;
 						$p['username']   = $users->username;
 						$usera[]         = $p;
