@@ -54,18 +54,7 @@ function mentions_tag_user($hook, $type, $return, $params) {
  */
 function mentions_replace_usernames($text) {
 		$url = ossn_site_url('u/');
-		function replace_usernames_mentions($matches){
-				if($user = ossn_user_by_username($matches[1])){
-						return ossn_plugin_view('output/url', array(
-								'href' => $user->profileURL(),
-								'_target' => 'blank',
-								'text' => $user->fullname,
-								'class' => 'mentions-user',
-						));
-				} 
-				return '@'.$matches[1];
-		}
-		return preg_replace_callback('/@(\w+)/', 'replace_usernames_mentions', $text);
+		return preg_replace_callback('/@(\w+)/', 'replace_usernames_mentions_links', $text);
 }
 /**
  * Mentions Picker
@@ -103,5 +92,22 @@ function mentions_picker() {
 				}
 		}
 		echo json_encode($usera);
+}
+/** 
+ * Replace preg_match_callback
+ *
+ * @access private
+ * @return string
+ */
+function replace_usernames_mentions_links($matches){
+				if($user = ossn_user_by_username($matches[1])){
+						return ossn_plugin_view('output/url', array(
+								'href' => $user->profileURL(),
+								'_target' => 'blank',
+								'text' => $user->fullname,
+								'class' => 'mentions-user',
+						));
+				} 
+				return '@'.$matches[1];
 }
 ossn_register_callback('ossn', 'init', 'mentions_init');
