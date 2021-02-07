@@ -4,7 +4,7 @@ var mentionUI = new Tribute({
         return '<img src="' + item.original.imageurl + '">' + item.string;
     },
     selectTemplate: function(item) {
-        return '<p class="tribute-mention">@' + item.original.value + '</p> ';
+        return '<p contenteditable="false" class="tribute-mention">@' + item.original.value + '</p> ';
     },
     requireLeadingSpace: false,
     values: function(text, cb) {
