@@ -31,13 +31,15 @@ function mention_users_ui_search(text, cb) {
 //bug in chrome that re-creates old element after removing using backspace
 //https://stackoverflow.com/questions/31207738/contenteditable-re-creates-deleted-child-elements
 $(document).ready(function() {
-    mentionUI.attach(document.querySelectorAll(".comment-box"));
-    document.querySelector('[contenteditable=true]').addEventListener('DOMNodeInserted', function(event) {
-        if (event.target.tagName == 'SPAN') {
-            event.target.outerHTML = event.target.innerHTML;
-            event.target.remove();
-        }
-    });
+    if ($('.comment-box').length > 0) {
+        mentionUI.attach(document.querySelectorAll(".comment-box"));
+        document.querySelector('[contenteditable=true]').addEventListener('DOMNodeInserted', function(event) {
+            if (event.target.tagName == 'SPAN') {
+                event.target.outerHTML = event.target.innerHTML;
+                event.target.remove();
+            }
+        });
+    }
 });
 $(document).ajaxComplete(function(event, xhr, settings) {
     var substrings = ['?offset='];
