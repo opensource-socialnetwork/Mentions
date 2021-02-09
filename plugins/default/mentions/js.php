@@ -1,16 +1,18 @@
 //<script>
-var mentionUI = new Tribute({
-    menuItemTemplate: function(item) {
-        return '<img src="' + item.original.imageurl + '">' + item.string;
-    },
-    selectTemplate: function(item) {
-        return '<p contenteditable="false" class="tribute-mention">@' + item.original.value + '</p> ';
-    },
-    requireLeadingSpace: false,
-    values: function(text, cb) {
-        mention_users_ui_search(text, users => cb(users));
-    },
-});
+if ($('.comment-box').length > 0) {
+    var mentionUI = new Tribute({
+        menuItemTemplate: function(item) {
+            return '<img src="' + item.original.imageurl + '">' + item.string;
+        },
+        selectTemplate: function(item) {
+            return '<p contenteditable="false" class="tribute-mention">@' + item.original.value + '</p> ';
+        },
+        requireLeadingSpace: false,
+        values: function(text, cb) {
+            mention_users_ui_search(text, users => cb(users));
+        },
+    });
+}
 
 function mention_users_ui_search(text, cb) {
     var URL = Ossn.site_url + "mentions_picker";
