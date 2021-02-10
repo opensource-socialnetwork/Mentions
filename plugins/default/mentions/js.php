@@ -1,19 +1,4 @@
 //<script>
-if ($('.comment-box').length > 0) {
-    var mentionUI = new Tribute({
-        menuItemTemplate: function(item) {
-            return '<img src="' + item.original.imageurl + '">' + item.string;
-        },
-        selectTemplate: function(item) {
-            return '<p contenteditable="false" class="tribute-mention">@' + item.original.value + '</p> ';
-        },
-        requireLeadingSpace: false,
-        values: function(text, cb) {
-            mention_users_ui_search(text, users => cb(users));
-        },
-    });
-}
-
 function mention_users_ui_search(text, cb) {
     var URL = Ossn.site_url + "mentions_picker";
     xhr = new XMLHttpRequest();
@@ -34,6 +19,18 @@ function mention_users_ui_search(text, cb) {
 //https://stackoverflow.com/questions/31207738/contenteditable-re-creates-deleted-child-elements
 $(document).ready(function() {
     if ($('.comment-box').length > 0) {
+        var mentionUI = new Tribute({
+            menuItemTemplate: function(item) {
+                return '<img src="' + item.original.imageurl + '">' + item.string;
+            },
+            selectTemplate: function(item) {
+                return '<p contenteditable="false" class="tribute-mention">@' + item.original.value + '</p> ';
+            },
+            requireLeadingSpace: false,
+            values: function(text, cb) {
+                mention_users_ui_search(text, users => cb(users));
+            },
+        });
         mentionUI.attach(document.querySelectorAll(".comment-box"));
         document.querySelector('[contenteditable=true]').addEventListener('DOMNodeInserted', function(event) {
             if (event.target.tagName == 'SPAN') {

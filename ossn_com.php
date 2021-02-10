@@ -18,15 +18,15 @@ function mentions_init() {
 		ossn_extend_view('js/opensource.socialnetwork', 'mentions/js');
 		ossn_extend_view('css/ossn.default', 'mentions/css');
 
-		if(ossn_isLoggedin()) {
+		if(ossn_isLoggedin()) {				
 				ossn_load_external_js('tribute.js');
 
 				ossn_register_page('mentions_picker', 'mentions_picker');
-
 				ossn_add_hook('comment:view', 'template:params', 'mentions_tag_user', 150);
 
 				ossn_new_external_js('tribute.js', ossn_add_cache_to_url('components/Mentions/vendors/tribute.js'));
 				ossn_extend_view('forms/OssnComments/comment/edit', 'mentions/comment_edit');
+			
 		}
 }
 /**
