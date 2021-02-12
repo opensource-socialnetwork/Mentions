@@ -43,6 +43,18 @@ $(document).ready(function() {
 $(document).ajaxComplete(function(event, xhr, settings) {
     var substrings = ['?offset='];
     if (substrings.some(substrings => settings.url.includes(substrings))) {
+        var mentionUI = new Tribute({
+            menuItemTemplate: function(item) {
+                return '<img src="' + item.original.imageurl + '">' + item.string;
+            },
+            selectTemplate: function(item) {
+                return '<p contenteditable="false" class="tribute-mention">@' + item.original.value + '</p> ';
+            },
+            requireLeadingSpace: false,
+            values: function(text, cb) {
+                mention_users_ui_search(text, users => cb(users));
+            },
+        });		
         mentionUI.attach(document.querySelectorAll(".comment-box"));
     }
 });
