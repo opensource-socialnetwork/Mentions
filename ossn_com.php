@@ -2,11 +2,11 @@
 /**
  * Open Source Social Network
  *
- * @package   (softlab24.com).ossn
- * @author    OSSN Core Team <info@softlab24.com>
- * @copyright 2014-2018 SOFTLAB24 LIMITED
+ * @package   Open Source Social Network
+ * @author    Open Social Website Core Team <info@openteknik.com>
+ * @copyright (C) OpenTeknik LLC
  * @license   Open Source Social Network License (OSSN LICENSE)  http://www.opensource-socialnetwork.org/licence
- * @link      http://www.opensource-socialnetwork.org/
+ * @link      https://www.opensource-socialnetwork.org/
  */
 define('Mentions', ossn_route()->com . 'Mentions/');
 /**
