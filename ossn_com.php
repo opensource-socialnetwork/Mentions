@@ -67,29 +67,26 @@ function mentions_picker() {
 		if(!ossn_isLoggedin()) {
 				exit();
 		}
+		$search_for = input('q');
+		$usera   = array();
 		$user    = new OssnUser();
-		$friends = $user->getFriends(ossn_loggedin_user()->guid);
+		
+		$options = array();
+		if(!empty($search_for)){
+				$options = array(
+						'wheres' => "(CONCAT(u.first_name,  ' ', u.last_name) LIKE '%{$search_for}%')",															   
+				);	
+		}
+		$friends = $user->getFriends(ossn_loggedin_user()->guid, $options);
 		if(!$friends) {
+				echo json_encode(array());
 				return false;
 		}
-		$search_for = input('q');
-		// allow case insensitivity with first typed in char
-		$fc         = mb_strtoupper(mb_substr($search_for, 0, 1, 'UTF-8'), 'UTF-8');
-		$search_For = $fc . mb_substr($search_for, 1, null, 'UTF-8');
-		// show all friends with wildcard '*' in first place
-		if($search_for == '*') {
-				$search_for = '';
-				$search_For = '';
-		}
-		$search_len = mb_strlen($search_for, 'UTF-8');
 		foreach ($friends as $users) {
-				$first_name_start = mb_substr($users->first_name, 0, $search_len, 'UTF-8');
-				if($first_name_start == $search_for || $first_name_start == $search_For) {
 						$p['key'] 		 = $users->fullname;
 						$p['imageurl']   = $users->iconURL()->smaller;
 						$p['value']   = $users->username;
 						$usera[]         = $p;
-				}
 		}
 		echo json_encode($usera);
 }

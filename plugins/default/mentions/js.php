@@ -30,6 +30,9 @@ $(document).ready(function() {
             values: function(text, cb) {
                 mention_users_ui_search(text, users => cb(users));
             },
+            noMatchTemplate: function (tribute) {
+                return '<li>'+Ossn.Print('mentionsui:nomatch')+'</li>';
+            },	
         });
         mentionUI.attach(document.querySelectorAll(".comment-box"));
         document.querySelector('[contenteditable=true]').addEventListener('DOMNodeInserted', function(event) {
