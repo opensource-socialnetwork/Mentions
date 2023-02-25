@@ -76,6 +76,11 @@ function mentions_picker() {
 				$options = array(
 						'wheres' => "(CONCAT(u.first_name,  ' ', u.last_name) LIKE '%{$search_for}%')",															   
 				);	
+				if(com_is_active('DisplayUsername')){
+					$options = array(
+						'wheres' => "(u.username LIKE '%{$search_for}%')",															   
+					);	
+				}
 		}
 		$friends = $user->getFriends(ossn_loggedin_user()->guid, $options);
 		if(!$friends) {
