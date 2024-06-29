@@ -106,7 +106,7 @@ function replace_usernames_mentions_links($matches){
 						return ossn_plugin_view('output/url', array(
 								'href' => $user->profileURL(),
 								'_target' => 'blank',
-								'text' => $user->fullname,
+								'text' => '<img src="' . $user->iconURL()->smaller . '" alt="icon" class="mention-icon" style="display: inline-block; vertical-align: middle;" /> ' . $user->fullname,
 								'class' => 'mentions-user',
 						));
 				} 
